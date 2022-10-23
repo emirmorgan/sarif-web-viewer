@@ -6,7 +6,7 @@ export const Result = () => {
   const { logs } = useContext(LogsContext);
 
   return (
-    <div className="mt-5">
+    <div>
       <Viewer logs={logs} />
     </div>
   );

@@ -2,19 +2,23 @@ import { useContext } from "react";
 import LogsContext from "../../context/LogsContext";
 
 export const Navbar = () => {
-  const { logs, setLogs } = useContext(LogsContext);
+  const { setLogs } = useContext(LogsContext);
 
   const fileHandler = (e: any) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
+    const files = e.target.files;
 
-    reader.onload = function (e: any) {
-      const log = JSON.parse(e.target.result);
+    Array.from(files).forEach((file: any) => {
+      const reader = new FileReader();
 
-      setLogs([...logs, log]);
-    };
+      reader.onload = function (e: any) {
+        setLogs((prevState: any) => [
+          ...prevState,
+          JSON.parse(e.target.result),
+        ]);
+      };
 
-    reader.readAsText(file);
+      reader.readAsText(file);
+    });
   };
 
   return (
