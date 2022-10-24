@@ -2,7 +2,7 @@ import { useContext } from "react";
 import LogsContext from "../../context/LogsContext";
 
 export const Navbar = () => {
-  const { setLogs } = useContext(LogsContext);
+  const { setLogs, setCount } = useContext(LogsContext);
 
   const fileHandler = (e: any) => {
     const files = e.target.files;
@@ -15,6 +15,7 @@ export const Navbar = () => {
           ...prevState,
           JSON.parse(e.target.result),
         ]);
+        setCount((count: any) => (count += 1));
       };
 
       reader.readAsText(file);

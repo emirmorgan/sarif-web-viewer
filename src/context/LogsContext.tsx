@@ -8,9 +8,10 @@ type LogsContextProviderProps = {
 
 export const LogsProvider = ({ children }: LogsContextProviderProps) => {
   const [logs, setLogs] = useState([]);
+  const [count, setCount] = useState(0);
 
   return (
-    <LogsContext.Provider value={{ logs, setLogs }}>
+    <LogsContext.Provider value={{ logs, setLogs, count, setCount }}>
       {children}
     </LogsContext.Provider>
   );
