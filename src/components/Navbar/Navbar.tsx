@@ -8,17 +8,20 @@ export const Navbar = () => {
     const files = e.target.files;
 
     Array.from(files).forEach((file: any) => {
-      const reader = new FileReader();
+      const extension = file.name.split(".").pop().toLowerCase();
+      if (extension === "sarif") {
+        const reader = new FileReader();
 
-      reader.onload = function (e: any) {
-        setLogs((prevState: any) => [
-          ...prevState,
-          JSON.parse(e.target.result),
-        ]);
-        setCount((count: any) => (count += 1));
-      };
+        reader.onload = function (e: any) {
+          setLogs((prevState: any) => [
+            ...prevState,
+            JSON.parse(e.target.result),
+          ]);
+          setCount((count: any) => (count += 1));
+        };
 
-      reader.readAsText(file);
+        reader.readAsText(file);
+      }
     });
   };
 
